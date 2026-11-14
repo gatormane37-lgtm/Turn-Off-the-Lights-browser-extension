@@ -31,6 +31,14 @@ struct HelpView: View {
     
     @State private var showGuide = false
     
+    private var currentYear: String {
+        String(Calendar.current.component(.year, from: Date()))
+    }
+    
+    private var copyrightText: String {
+        "© \(currentYear) Stefan vd"
+    }
+    
     var body: some View {
         NavigationStack{
             Form{
@@ -60,7 +68,7 @@ struct HelpView: View {
                     
                     HStack{
                         Text("Copyright")
-                        Text("© 2025 Stefan vd")
+                        Text(copyrightText)
                     }
                     .accessibilityElement(children: .combine)
                     
@@ -100,18 +108,20 @@ struct HelpView: View {
                     .accessibilityHint(Text("Opens in your web browser"))
                     
                     Button(action: {
-                        StefanFunctions().openURL(URL(string: StefanLinks().linksourccode())!)
+                        StefanFunctions().openURL(URL(string: StefanLinks().linksourcecode())!)
                     }) {
                         Text("View Open-Source Code")
                     }
                     .accessibilityHint(Text("Opens in your web browser"))
 
+                    /*
                     Button(action: {
                         StefanFunctions().openURL(URL(string: StefanLinks().linkdonate())!)
                     }) {
                         Text("Make a Donation")
                     }
                     .accessibilityHint(Text("Opens in your web browser"))
+                    */
                 }
                 
                 Section(header: Text("Explore & Connect"))
@@ -146,7 +156,7 @@ struct HelpView: View {
         }
     }
     
-    var productURL = URL(string: StefanLinks().linkdeveloperwebsite())!
+    var productURL = URL(string: StefanLinks().webappturnoffthelights())!
     
     func openreview() {
         var components = URLComponents(url: productURL, resolvingAgainstBaseURL: false)
